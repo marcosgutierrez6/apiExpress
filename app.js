@@ -15,6 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
 MongoDBUtil.init();
 
 app.use('/users', UserController);
@@ -25,6 +28,11 @@ app.get('/', function (req, res) {
         name: pkg.name,
         version: pkg.version,
         status: 'up'
+    });
+});
+
+app.get('/home', function(req, res) {
+    res.render('pages/index', {
     });
 });
 
@@ -46,6 +54,11 @@ app.use(function (err, req, res, next) {
         message: res.locals.message,
         error: res.locals.error
     });
+});
+
+var port = process.env.PORT || 3001;
+app.listen(port, function () {
+    console.log('Servidor escuchando en el puerto ' + port);
 });
 
 module.exports = app;
