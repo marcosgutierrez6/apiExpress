@@ -1,0 +1,73 @@
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
+        <!-- Encabezado -->
+        <div class="text-center">
+            <div class="flex justify-center">
+                <!-- Ícono de hotel de ejemplo usando clases de Tailwind -->
+                <div class="w-20 h-20 bg-indigo-600 rounded-full flex items-center justify-center">
+                    <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                </div>
+            </div>
+            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+                Sistema de Gestión Hotelera
+            </h2>
+            <p class="mt-2 text-sm text-gray-600">
+                Inicia sesión para acceder a tu panel de control
+            </p>
+        </div>
+
+        <!-- Formulario de Inicio de Sesión -->
+        <form class="mt-8 space-y-6">
+            <div class="rounded-md shadow-sm space-y-4">
+                <div>
+                    <label for="user" class="block text-sm font-medium text-gray-700">
+                        Usuario
+                    </label>
+                    <input id="user" name="user" type="text" required
+                        class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        Contraseña
+                    </label>
+                    <input id="password" name="password" type="password" required
+                        class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit"
+                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Iniciar sesión
+                </button>
+            </div>
+        </form>
+
+        <!-- Pie de página -->
+        <div class="text-center text-sm text-gray-600">
+            <p>¿Necesitas ayuda? Contacta con Soporte Técnico</p>
+            <p class="mt-1">© 2025 Sistema de Gestión Hotelera. Todos los derechos reservados.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector("form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita que el formulario se envíe automáticamente
+
+            var user = document.getElementById("user").value;
+            var password = document.getElementById("password").value;
+
+            if (user === "root" && password === "password") {
+                // Redirige a la página de inicio si las credenciales son correctas
+                window.location.href = "/home";
+            } else {
+                alert("Usuario o contraseña incorrectos. Inténtalo de nuevo.");
+            }
+        });
+    });
+</script>

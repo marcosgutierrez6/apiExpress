@@ -33,7 +33,7 @@
             connectionString += config.user + ':' + config.password + '@';
         }
 
-        connectionString += config.server + '/' + config.database;
+        connectionString += config.server + '/' + config.database + '?authSource=admin';
 
         return connectionString;
     }

@@ -3,36 +3,40 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var expressLayouts = require('express-ejs-layouts');
 
 var app = express();
 
 var MongoDBUtil = require('./modules/mongodb/mongodb.module').MongoDBUtil;
-
 var UserController = require('./modules/user/user.module')().UserController;
 
+// View engine setup
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.use(expressLayouts);
+app.set('layout', 'layouts/appLayout');
+
+// Middleware
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
 MongoDBUtil.init();
 
 app.use('/users', UserController);
 
-app.get('/', function (req, res) {
-    var pkg = require(path.join(__dirname, 'package.json'));
-    res.json({
-        name: pkg.name,
-        version: pkg.version,
-        status: 'up'
+app.get('/', function(req, res) {
+    res.render('pages/auth/login', {
+        title: 'Login',
+        layout: 'layouts/auth',
     });
 });
 
 app.get('/home', function(req, res) {
     res.render('pages/home', {
+        title: 'Home',
+        layout: 'layouts/appLayout',
     });
 });
 
@@ -56,7 +60,7 @@ app.use(function (err, req, res, next) {
     });
 });
 
-var port = process.env.PORT || 3001;
+var port = process.env.PORT || 3002;
 app.listen(port, function () {
     console.log('Servidor escuchando en el puerto ' + port);
 });
